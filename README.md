@@ -18,5 +18,5 @@ output               Output : xml - json - stdout
 ### Just with pip
 
 ```
-pip install --user lxml beautifulsoup4 requests
+pip install --user lxml beautifulsoup4 requests termcolor
 ```
