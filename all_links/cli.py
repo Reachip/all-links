@@ -3,10 +3,10 @@ from argparse import ArgumentParser
 
 from termcolor import colored
 
-from website import Website
-from printer import LinksPrinter
-from writer import FileWriter
-from website import WebsiteArchitecture
+from all_links.website import Website
+from all_links.printer import LinksPrinter
+from all_links.writer import FileWriter
+from all_links.website import WebsiteArchitecture
 
 
 class CLI:

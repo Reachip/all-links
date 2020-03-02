@@ -1,6 +1,6 @@
-from parser import HTMLParser
-from request import HTTPRequest
-from writer import FileWriter
+from all_links.parser import HTMLParser
+from all_links.request import HTTPRequest
+from all_links.writer import FileWriter
 
 
 class Website:
