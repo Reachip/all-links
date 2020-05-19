@@ -1,6 +1,8 @@
+# Other
+.vscode/
+
 # Poetry
 dist/
-tests/
 poetry.lock
 
 # Byte-compiled / optimized / DLL files
