@@ -18,3 +18,5 @@ class TestFileWriter:
     def test_to_xml(self, website_arch):
         self.writer.write_architecture_to_xml(website_arch)
         assert os.path.exists("test_output") is True
+
+        os.remove("test_output")
