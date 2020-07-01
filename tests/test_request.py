@@ -1,9 +1,10 @@
 from all_links.request import HTTPRequest
 from all_links.website import Website
 
+
 class TestHTTPRequest:
     website = Website("https://reachip.github.io")
-    
+
     def test_make_request(self, mocker, html):
         class ResponseMocker:
             @property

@@ -3,6 +3,7 @@ import os
 from all_links.website import WebsiteArchitecture
 from all_links.writer import FileWriter
 
+
 class TestFileWriter:
     writer = FileWriter("test_output")
 
@@ -17,5 +18,3 @@ class TestFileWriter:
     def test_to_xml(self, website_arch):
         self.writer.write_architecture_to_xml(website_arch)
         assert os.path.exists("test_output") is True
-
-

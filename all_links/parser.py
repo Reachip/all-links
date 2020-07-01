@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 class HTMLParser:
     def __init__(self, html):
         self.html = str(html)
-        self.parser = BeautifulSoup(self.html, 'lxml')
+        self.parser = BeautifulSoup(self.html, "lxml")
 
     @property
     def page_title(self):

@@ -2,11 +2,12 @@ import pytest
 import json
 from all_links.website import Website, WebsiteArchitecture
 
+
 class TestWebsite:
     @pytest.fixture
     def website(self, html_page_title):
         return Website(html_page_title)
-    
+
     def test__get_absolute_link(self, website):
         link = "/a_test_link"
         assert website._get_absolute_link(link) == f"{str(website)}{link}"
@@ -22,10 +23,13 @@ class TestWebsite:
         link = f"{str(website)}/a_test_link"
         assert website._link_is_on_website(link) == True
 
+
 class TestWebsiteArchitecture:
     @pytest.fixture
     def website_architecture(self, website_links):
         return WebsiteArchitecture(website_links)
 
     def test_to_json(self, website_architecture, website_links_dict):
-        assert website_architecture.to_json() == json.dumps(website_links_dict, sort_keys=True, indent=4)
+        assert website_architecture.to_json() == json.dumps(
+            website_links_dict, sort_keys=True, indent=4
+        )

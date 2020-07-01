@@ -13,11 +13,14 @@ class CLI:
     def __init__(self):
         parser = ArgumentParser()
         parser.add_argument(
-            "url", help="The website URL (ex: https://reachip.github.io)", type=str)
+            "url", help="The website URL (ex: https://reachip.github.io)", type=str
+        )
+        parser.add_argument("output", help="Output : xml - json - stdout", type=str)
         parser.add_argument(
-            "output", help="Output : xml - json - stdout", type=str)
-        parser.add_argument(
-            "--filename", help="output filename if you want to generate a JSON or XML format", type=str)
+            "--filename",
+            help="output filename if you want to generate a JSON or XML format",
+            type=str,
+        )
         self.args = parser.parse_args()
 
     def run(self):
@@ -39,4 +42,8 @@ class CLI:
 
         else:
             sys.stdout.write(
-                colored('\n ERROR:"output" argument as to be "xml", "json" or "stdout" ! \n', "red"))
+                colored(
+                    '\n ERROR:"output" argument as to be "xml", "json" or "stdout" ! \n',
+                    "red",
+                )
+            )

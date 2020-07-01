@@ -23,30 +23,27 @@ def website_links():
         "https://b/c/quora.html",
         "https://b/c/rust.html",
         "https://b/c/sti2d.html",
-        "https://b/"
+        "https://b/",
     )
+
 
 @pytest.fixture
 def website_links_dict():
     return {
-        "": [
-            "https://b/"
-        ],
-
+        "": ["https://b/"],
         "a": [
             "https://b/a/CV.html#CV",
             "https://b/a/tmp.html#tmp",
             "https://b/a/projets-scolaires.html#projets-scolaires",
         ],
-
         "c": [
             "https://b/c/js.html",
             "https://b/c/python.html",
             "https://b/c/programmation.html",
             "https://b/c/quora.html",
             "https://b/c/rust.html",
-            "https://b/c/sti2d.html"
-        ]
+            "https://b/c/sti2d.html",
+        ],
     }
 
 

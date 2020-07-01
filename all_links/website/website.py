@@ -11,7 +11,11 @@ class Website:
         if link.startswith("/"):
             link = self.url + link
 
-        if not link.startswith(self.url) and not link.startswith("http") and link.endswith(".html"):
+        if (
+            not link.startswith(self.url)
+            and not link.startswith("http")
+            and link.endswith(".html")
+        ):
             link = self.url + "/" + link
 
         return link
@@ -28,7 +32,10 @@ class Website:
             for link in parser.iter_links():
                 absolute_link = str(self._get_absolute_link(link))
 
-                if self._link_is_on_website(absolute_link) and absolute_link not in links:
+                if (
+                    self._link_is_on_website(absolute_link)
+                    and absolute_link not in links
+                ):
                     links.append(absolute_link)
                     _get_links(absolute_link, links)
 

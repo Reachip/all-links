@@ -1,6 +1,7 @@
 import pytest
 from all_links.parser import HTMLParser
 
+
 class TestParser:
     @pytest.fixture
     def parser(self, html):
