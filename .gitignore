@@ -3,6 +3,7 @@
 
 *.xml
 *.json
+*.db
 
 # Poetry
 dist/
