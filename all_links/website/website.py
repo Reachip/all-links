@@ -1,11 +1,14 @@
+import uuid
 from all_links.parser import HTMLParser
 from all_links.request import HTTPRequest
 from all_links.writer import FileWriter
+from all_links.cache import Cache
 
 
 class Website:
     def __init__(self, url):
         self.url = url
+        self._id = str(uuid.uuid4())
 
     def _get_absolute_link(self, link):
         if link.startswith("/"):
@@ -24,22 +27,23 @@ class Website:
         return link != self.url and link.startswith(self.url)
 
     def get_links(self):
-        def _get_links(url, links=[]):
-            request = HTTPRequest(url)
-            request.make_request()
-            parser = HTMLParser(request)
+        def _get_links(url):
+            with Cache(self._id) as cache:
+                request = HTTPRequest(url)
+                request.make_request()
+                parser = HTMLParser(request)
 
-            for link in parser.iter_links():
-                absolute_link = str(self._get_absolute_link(link))
+                for link in parser.iter_links():
+                    absolute_link = str(self._get_absolute_link(link))
 
-                if (
-                    self._link_is_on_website(absolute_link)
-                    and absolute_link not in links
-                ):
-                    links.append(absolute_link)
-                    _get_links(absolute_link, links)
+                    link_is_on_website = self._link_is_on_website(absolute_link)
+                    link_is_on_the_cache = cache.link_is_on_the_cache(absolute_link)
 
-            return links
+                    if link_is_on_website and not link_is_on_the_cache:
+                        cache.store_link(absolute_link)
+                        _get_links(absolute_link)
+
+                return cache.get_links()
 
         return _get_links(self.url)
 
