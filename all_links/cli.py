@@ -36,24 +36,28 @@ class CLI:
         stdout_handler = logging.StreamHandler(sys.stdout)
         logger.addHandler(stdout_handler)
 
-    def _handle_xml_output(self, links):
-        self.write_simple_log(f"Creating {self.args.filename}.xml\n")
-        writer = FileWriter(f"{self.args.filename}.xml")
-        writer.write_architecture_to_xml(WebsiteArchitecture(links))
+    def _handle_xml_output(self, website):
+        filename = self.args.filename if self.args.filename != None else website._id
+        self.write_simple_log(f"Creating {filename}.xml\n")
+        writer = FileWriter(f"{filename}.xml")
+        website_arch = WebsiteArchitecture(website.get_links())
+        writer.write_architecture_to_xml(website_arch)
         self.write_simple_log(
-            f"Website urls written in {self.args.filename}.xml successfully. \n"
+            f"Website urls written in {filename}.xml successfully. \n"
         )
 
-    def _handle_json_output(self, links):
-        self.write_simple_log(f"Creating {self.args.filename}.json\n")
-        writer = FileWriter(f"{self.args.filename}.json")
-        writer.write_architecture_to_json(WebsiteArchitecture(links))
+    def _handle_json_output(self, website):
+        filename = self.args.filename if self.args.filename != None else website._id
+        self.write_simple_log(f"Creating {filename}.xml\n")
+        writer = FileWriter(f"{filename}.xml")
+        website_arch = WebsiteArchitecture(website.get_links())
+        writer.write_architecture_to_json(website_arch)
         self.write_simple_log(
-            f"Website urls written in {self.args.filename}.json successfully. \n"
+            f"Website urls written in {filename}.xml successfully. \n"
         )
 
-    def _handle_stdout(self, links):
-        stdout = LinksPrinter(links)
+    def _handle_stdout(self, website):
+        stdout = LinksPrinter(website.get_links())
         sys.stdout.write(str(stdout))
         self.write_simple_log(f"Website urls written successfully into STDOUT. \n")
 
@@ -62,18 +66,16 @@ class CLI:
             self._set_detailed_logs()
 
         if self.args.output in ("json", "xml", "stdout"):
-            self.write_simple_log(f"Asking {self.args.url}")
             website = Website(self.args.url)
-            links = website.get_links()
 
             if self.args.output == "xml":
-                self._handle_xml_output(links)
+                self._handle_xml_output(website)
 
             if self.args.output == "json":
-                self._handle_json_output(links)
+                self._handle_json_output(website)
 
             if self.args.output == "stdout":
-                self._handle_stdout(links)
+                self._handle_stdout(website)
 
         else:
             self.write_simple_log(
