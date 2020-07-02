@@ -31,13 +31,14 @@ class Cache:
         sql = f"SELECT * FROM website WHERE link = '{link}'"
         cursor = self.connector.cursor()
         cursor = cursor.execute(sql)
+        link_is_on_the_cache = False
 
-        if cursor.fetchall() == []:
-            return False
+        if not cursor.fetchall() == []:
+            link_is_on_the_cache = True
 
         self.connector.commit()
         cursor.close()
-        return True
+        return link_is_on_the_cache
 
     def get_links(self):
         sql = "SELECT * FROM website"
