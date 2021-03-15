@@ -1,5 +1,5 @@
 import sys
-from all_links.cli import CLI
+from cli import CLI
 
 sys.setrecursionlimit(3000)
 
