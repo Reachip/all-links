@@ -1,5 +1,5 @@
 from termcolor import colored
-from website import WebsiteArchitecture
+from all_links.website import WebsiteArchitecture
 
 
 class LinksPrinter:
